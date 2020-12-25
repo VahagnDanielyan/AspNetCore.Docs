@@ -5,11 +5,12 @@ description: Learn how to use the Distributed Cache Tag Helper.
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/24/2020
+no-loc: [appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
 ---
 # Distributed Cache Tag Helper in ASP.NET Core
 
-By [Peter Kellner](https://peterkellner.net) and [Luke Latham](https://github.com/guardrex)
+By [Peter Kellner](https://peterkellner.net)
 
 The Distributed Cache Tag Helper provides the ability to dramatically improve the performance of your ASP.NET Core app by caching its content to a distributed cache source.
 

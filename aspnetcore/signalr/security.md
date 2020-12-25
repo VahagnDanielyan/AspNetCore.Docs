@@ -6,7 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
-no-loc: [SignalR]
+no-loc: [appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
 uid: signalr/security
 ---
 # Security considerations in ASP.NET Core SignalR
@@ -30,13 +30,12 @@ For more information on configuring CORS, see [Enable Cross-Origin Requests (COR
 * HTTP methods `GET` and `POST` must be allowed.
 * Credentials must be allowed in order for cookie-based sticky sessions to work correctly. They must be enabled even when authentication isn't used.
 
-<!--
-::: moniker range=">= aspnetcore-5.0"  // Moniker here just to make sure this doesn't get missed in the 5.0 version update.
-However, in 5.0 we have provided an option in the TypeScript client to not use credentials.
-The not to use credentials option should only be used when you know 100% that credentials like Cookies are not needed in your app (cookies are used by azure app service when using multiple servers)
+::: moniker range=">= aspnetcore-5.0"
 
-For more info, see https://github.com/aspnet/AspNetCore.Docs/issues/16003
-.-->
+However, in 5.0 we have provided an option in the TypeScript client to not use credentials.
+The option to not use credentials should only be used when you know 100% that credentials like Cookies are not needed in your app (cookies are used by azure app service when using multiple servers for sticky sessions).
+
+::: moniker-end
 
 For example, the following CORS policy allows a SignalR browser client hosted on `https://example.com` to access the SignalR app hosted on `https://signalr.example.com`:
 
@@ -61,7 +60,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
     app.UseEndpoints(endpoints =>
     {
-        endpoints.MapHub<ChatHub>("/chatHub");
+        endpoints.MapHub<ChatHub>("/chathub");
     });
 
     // ... other middleware ...
@@ -75,9 +74,6 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 [!code-csharp[Main](security/sample/Startup.cs?name=snippet1)]
 
 ::: moniker-end
-
-> [!NOTE]
-> SignalR is not compatible with the built-in CORS feature in Azure App Service.
 
 ## WebSocket Origin Restriction
 
@@ -115,7 +111,7 @@ When using WebSockets or Server-Sent Events, the browser client sends the access
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
-      Request starting HTTP/1.1 GET http://localhost:5000/myhub?access_token=1234
+      Request starting HTTP/1.1 GET http://localhost:5000/chathub?access_token=1234
 ```
 
 If you have concerns about logging this data with your server logs, you can disable this logging entirely by configuring the `Microsoft.AspNetCore.Hosting` logger to the `Warning` level or above (these messages are written at `Info` level). For more information, see [Log Filtering](xref:fundamentals/logging/index#log-filtering) for more information. If you still want to log certain request information, you can [write a middleware](xref:fundamentals/middleware/write) to log the data you require and filter out the `access_token` query string value (if present).

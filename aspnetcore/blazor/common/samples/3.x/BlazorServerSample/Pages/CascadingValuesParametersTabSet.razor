@@ -7,7 +7,7 @@
         <h4>Greetings from the first tab!</h4>
 
         <label>
-            <input type="checkbox" @bind="_showThirdTab" />
+            <input type="checkbox" @bind="showThirdTab" />
             Toggle third tab
         </label>
     </Tab>
@@ -15,7 +15,7 @@
         <h4>The second tab says Hello World!</h4>
     </Tab>
 
-    @if (_showThirdTab)
+    @if (showThirdTab)
     {
         <Tab Title="Third tab">
             <h4>Welcome to the disappearing third tab!</h4>
@@ -47,7 +47,7 @@ namespace BlazorSample.UIInterfaces
         &lt;h4&gt;Greetings from the first tab!&lt;/h4&gt;
 
         &lt;label&gt;
-            &lt;input type="checkbox" @@bind="_showThirdTab" /&gt;
+            &lt;input type="checkbox" @@bind="showThirdTab" /&gt;
             Toggle third tab
         &lt;/label&gt;
     &lt;/Tab&gt;
@@ -55,7 +55,7 @@ namespace BlazorSample.UIInterfaces
         &lt;h4&gt;The second tab says Hello World!&lt;/h4&gt;
     &lt;/Tab&gt;
 
-    @@if (_showThirdTab)
+    @@if (showThirdTab)
     {
         &lt;Tab Title="Third tab"&gt;
             &lt;h4&gt;Welcome to the disappearing third tab!&lt;/h4&gt;
@@ -66,7 +66,7 @@ namespace BlazorSample.UIInterfaces
     
 @@code
 {
-    private bool _showThirdTab;
+    private bool showThirdTab;
 }</code></pre>
 
 <h2>TabSet.csthml</h2>
@@ -97,19 +97,11 @@ namespace BlazorSample.UIInterfaces
     {
         if (ActiveTab == null)
         {
-            SetActivateTab(tab);
+            SetActiveTab(tab);
         }
     }
 
-    public void RemoveTab(ITab tab)
-    {
-        if (ActiveTab == tab)
-        {
-            SetActivateTab(null);
-        }
-    }
-
-    public void SetActivateTab(ITab tab)
+    public void SetActiveTab(ITab tab)
     {
         if (ActiveTab != tab)
         {
@@ -127,7 +119,7 @@ namespace BlazorSample.UIInterfaces
 @@implements ITab
 
 &lt;li&gt;
-    &lt;a @@onclick="Activate" class="nav-link @@TitleCssClass" role="button"&gt;
+    &lt;a @@onclick="ActivateTab" class="nav-link @@TitleCssClass" role="button"&gt;
         @@Title
     &lt;/a&gt;
 &lt;/li&gt;
@@ -149,13 +141,13 @@ namespace BlazorSample.UIInterfaces
         ContainerTabSet.AddTab(this);
     }
 
-    private void Activate()
+    private void ActivateTab()
     {
-        ContainerTabSet.SetActivateTab(this);
+        ContainerTabSet.SetActiveTab(this);
     }
 }</code></pre>
 
 @code
 {
-    private bool _showThirdTab;
+    private bool showThirdTab;
 }
